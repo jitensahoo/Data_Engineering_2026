@@ -1,0 +1,24 @@
+resources:
+  jobs:
+    Medalion_architecture:
+      name: Medalion_architecture
+      tasks:
+        - task_key: Bronze_load
+          notebook_task:
+            notebook_path: ./Data_Engineering_2026/Employee_bronze.ipynb
+            source: WORKSPACE
+        - task_key: Silver_load
+          depends_on:
+            - task_key: Bronze_load
+          notebook_task:
+            notebook_path: /Workspace/Users/sahoojiten1994@gmail.com/Geek_2026_Morning/Employee_silver
+            source: WORKSPACE
+        - task_key: Gold_load
+          depends_on:
+            - task_key: Silver_load
+          notebook_task:
+            notebook_path: /Workspace/Users/sahoojiten1994@gmail.com/Geek_2026_Morning/Employee_Gold
+            source: WORKSPACE
+      queue:
+        enabled: true
+      performance_target: PERFORMANCE_OPTIMIZED
